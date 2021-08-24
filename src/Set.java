@@ -1,3 +1,8 @@
+/* Christopher Chakchay
+ * Programming fundamentals
+ * Summer 2021
+ * Programming Assignment 4 - Set ADT
+ */
 
 public class Set {
 
@@ -17,28 +22,33 @@ public class Set {
 			if (head == null) {
 				head = newNode;
 			} else {
-				LinkedNode n = head;
-				while (n.next != null) {
-					n = (LinkedNode) n.next;
-				}
-				n.next = newNode;
+
+				newNode.next = head;
+				head = newNode;
+
 			}
 		}
 	}
-//for testing
-//	public void show() {
-//
-//		LinkedNode node = head;
-//		while (node.next != null) {
-//
-//			System.out.println(node.data);
-//			node = (LinkedNode) node.next;
-//		}
-//		System.out.println(node.data);
-//	}
 
-	public void delete(int x) {
+	public LinkedNode delete(int x) {
 
+		LinkedNode current = head;
+		LinkedNode prev = null;
+
+		if (current.getData() == x) {
+			head = current.next;
+			return current;
+		}
+
+		while (current != null) {
+			if (current.getData() == x) {
+				prev.next = current.next;
+			}
+			prev = current;
+			current = current.getNext();
+
+		}
+		return current;
 	}
 
 	public boolean exists(int x) {
